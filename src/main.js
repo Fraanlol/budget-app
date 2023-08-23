@@ -5,8 +5,16 @@ import Root, {
   action as rootAction,
 } from "./components/root";
 import ErrorPage from "./components/not-found";
-import Client , {loader as contactLoader} from "./components/client";
-import EditContact, {action as editAction} from "./components/edit";
+import Client , 
+      {loader as contactLoader,
+        action as contactAction,
+      } from "./components/client";
+import EditContact, 
+      {action as editAction,
+      } from "./components/edit";
+import { action as destroyAction,
+       } from "./components/destroy";
+import Index from "./components/index";
 window.React = React;
 
 import {
@@ -24,16 +32,27 @@ const router = createBrowserRouter([
     action: rootAction,
     children: [
       {
-        path: "contacts/:contactId",
-        element: <Client />,
         errorElement: <ErrorPage />,
-        loader: contactLoader,
-      },
-      {
-        path: "contacts/:contactId/edit",
-        element: <EditContact />,
-        loader: contactLoader,
-        action: editAction,
+        children: [
+          { index: true, element: <Index /> },
+          {
+            path: "contacts/:contactId",
+            element: <Client />,
+            loader: contactLoader,
+            action: contactAction,
+          },
+          {
+            path: "contacts/:contactId/edit",
+            element: <EditContact />,
+            loader: contactLoader,
+            action: editAction,
+          },
+          {
+            path: "contacts/:contactId/destroy",
+            action: destroyAction,
+            errorElement: <div>Oops! There was an error.</div>,
+          },
+        ],
       },
     ],
   },
