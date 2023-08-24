@@ -7,7 +7,7 @@ export async function getContacts(query) {
   let contacts = await localforage.getItem("contacts");
   if (!contacts) contacts = [];
   if (query) {
-    contacts = matchSorter(contacts, query, { keys: ["first", "last"] });
+    contacts = matchSorter(contacts, query, { keys: ["first"] });
   }
   return contacts.sort(sortBy("last", "createdAt"));
 }

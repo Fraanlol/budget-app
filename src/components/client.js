@@ -26,13 +26,6 @@ export default function Client() {
   return (
     <div id="contact">
       <div>
-        <img
-          key={contact.avatar}
-          src={contact.avatar || null}
-        />
-      </div>
-
-      <div>
         <h1>
           {contact.first || contact.last ? (
             <>
@@ -41,25 +34,14 @@ export default function Client() {
           ) : (
             <i>No Name</i>
           )}{" "}
-          <Favorite contact={contact} />
         </h1>
 
-        {contact.twitter && (
-          <p>
-            <a
-              target="_blank"
-              href={`https://twitter.com/${contact.twitter}`}
-            >
-              {contact.twitter}
-            </a>
-          </p>
-        )}
-
-        {contact.notes && <p>{contact.notes}</p>}
-
+        {contact.mail && <p>{contact.mail}</p>}
+        {contact.phone && <p>{contact.phone}</p>}
+              {/* Quizas aca irian las cobranzas */}
         <div>
           <Form action="edit">
-            <button type="submit">Edit</button>
+            <button type="submit">Editar</button>
           </Form>
           <Form
             method="post"
@@ -74,31 +56,10 @@ export default function Client() {
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type="submit">Borrar</button>
           </Form>
         </div>
       </div>
     </div>
-  );
-}
-
-function Favorite({ contact }) {
-  // yes, this is a `let` for later
-  let favorite = contact.favorite;
-  const fetcher = useFetcher();
-  return (
-    <fetcher.Form method="post">
-      <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
-        aria-label={
-          favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
-      >
-        {favorite ? "★" : "☆"}
-      </button>
-    </fetcher.Form>
   );
 }

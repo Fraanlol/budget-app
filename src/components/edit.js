@@ -1,4 +1,4 @@
-import { Form, useLoaderData, redirect, useNavigate, } from "react-router-dom";
+import { Form, useLoaderData, redirect, } from "react-router-dom";
 import { updateContact } from "../contacts";
 
 export async function action({ request, params }) {
@@ -10,58 +10,41 @@ export async function action({ request, params }) {
 
 export default function EditContact() {
   const { contact } = useLoaderData();
-
   return (
     <Form method="post" id="contact-form">
       <p>
-        <span>Name</span>
+        <span>Nombre</span>
         <input
-          placeholder="First"
+          placeholder="Nombre"
           aria-label="First name"
           type="text"
           name="first"
           defaultValue={contact.first}
         />
-        <input
-          placeholder="Last"
-          aria-label="Last name"
-          type="text"
-          name="last"
-          defaultValue={contact.last}
-        />
       </p>
       <label>
-        <span>Tuiti</span>
+        <span>Email</span>
         <input
-          type="text"
-          name="twitter"
-          placeholder="@jack"
-          defaultValue={contact.twitter}
+          type="email"
+          name="mail"
+          placeholder="E-Mail"
+          defaultValue={contact.mail}
         />
       </label>
       <label>
-        <span>Avatar URL</span>
+        <span>Telefono</span>
         <input
-          placeholder="https://example.com/avatar.jpg"
-          aria-label="Avatar URL"
           type="text"
-          name="avatar"
-          defaultValue={contact.avatar}
-        />
-      </label>
-      <label>
-        <span>Notes</span>
-        <textarea
-          name="notes"
-          defaultValue={contact.notes}
-          rows={6}
+          name="phone"
+          placeholder="12-3456-7891"
+          defaultValue={contact.phone}
         />
       </label>
       <p>
-        <button type="submit">Save</button>
+        <button type="submit">Guardar</button>
         <button type="button" onClick={() => {
             navigate(-1);
-          }}>Cancel</button>
+          }}>Cancelar</button>
       </p>
     </Form>
   );

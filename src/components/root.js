@@ -16,7 +16,7 @@ export async function loader({ request }) {
   return { contacts, q };
 }
 
-export async function action() {
+export async function action(e) {
   const contact = await createContact();
   return redirect(`/main_window/contacts/${contact.id}/edit`);
 }
@@ -37,6 +37,9 @@ export default function Root() {
         <div id="sidebar">
           <h1>Clientes</h1>
           <div>
+          <Form method="get" action="/main_window" >
+              <button type="submit">Inicio</button>
+            </Form>
             <Form id="search-form" role="search">
               <input
                 id="q"
@@ -64,7 +67,7 @@ export default function Root() {
               ></div>
             </Form>
             <Form method="post">
-              <button type="submit">New</button>
+              <button type="submit">Nuevo</button>
             </Form>
           </div>
           <nav>
