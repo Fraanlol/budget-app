@@ -6,6 +6,7 @@ import {
   NavLink,
   useNavigation,
   useSubmit,
+  useLocation
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
 
@@ -18,7 +19,7 @@ export async function loader({ request }) {
 
 export async function action(e) {
   const contact = await createContact();
-  return redirect(`/main_window/contacts/${contact.id}/edit`);
+  return redirect(`/contacts/${contact.id}/edit`);
 }
 
 export default function Root() {
@@ -31,13 +32,14 @@ export default function Root() {
     new URLSearchParams(navigation.location.search).has(
       "q"
     );
-
+    const location = useLocation();
+      console.log(location)
     return (
       <>
         <div id="sidebar">
           <h1>Clientes</h1>
           <div>
-          <Form method="get" action="/main_window" >
+          <Form method="get" action="" >
               <button type="submit">Inicio</button>
             </Form>
             <Form id="search-form" role="search">

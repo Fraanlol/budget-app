@@ -38,7 +38,7 @@ export default function Client() {
 
         {contact.mail && <p>{contact.mail}</p>}
         {contact.phone && <p>{contact.phone}</p>}
-              {/* Quizas aca irian las cobranzas */}
+              {/* Leer el array con servicios, y por cada item, armar una lista */}
         <div>
           <Form action="edit">
             <button type="submit">Editar</button>

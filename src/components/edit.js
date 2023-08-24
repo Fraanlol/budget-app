@@ -5,7 +5,7 @@ export async function action({ request, params }) {
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
     await updateContact(params.contactId, updates);
-    return redirect(`/main_window/contacts/${params.contactId}`);
+    return redirect(`/contacts/${params.contactId}`);
   }
 
 export default function EditContact() {
@@ -40,6 +40,7 @@ export default function EditContact() {
           defaultValue={contact.phone}
         />
       </label>
+      {/* Elemento que contenga todos los servicios*/}
       <p>
         <button type="submit">Guardar</button>
         <button type="button" onClick={() => {

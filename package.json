@@ -11,6 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
+  "homepage": "./",
   "keywords": [],
   "author": {
     "name": "Franco Catas",
@@ -36,6 +37,24 @@
     "node-loader": "^2.0.0",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3"
+  },
+  "build": {
+    "extends": null,
+    "productName": "HP Builder",
+    "files": [
+      "src/**/*",
+      "package.json",
+      "main.js"
+    ],
+    "directories": {
+      "buildResources": "resources"
+    },
+    "extraResources": [
+      {
+        "from": "./src/preload.js",
+        "to": "./src/preload.js"
+      }
+    ]
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",

@@ -15,17 +15,19 @@ import EditContact,
 import { action as destroyAction,
        } from "./components/destroy";
 import Index from "./components/index";
+
 window.React = React;
 
 import {
   createBrowserRouter,
   RouterProvider,
+  createHashRouter,
 } from "react-router-dom";
 import "./index.css";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: "main_window",
+    path: "",
     element: <Root />,
     errorElement: <ErrorPage />,
     loader: rootLoader,
