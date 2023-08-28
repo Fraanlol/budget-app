@@ -9,6 +9,9 @@ import {
   useLocation
 } from "react-router-dom";
 import { getContacts, createContact } from "../contacts";
+import { Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import { SearchIcon, SpinnerIcon } from '@chakra-ui/icons'
+
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -33,21 +36,27 @@ export default function Root() {
       "q"
     );
     const location = useLocation();
-      console.log(location)
     return (
       <>
         <div id="sidebar">
           <h1>Clientes</h1>
           <div>
           <Form method="get" action="" >
-              <button type="submit">Inicio</button>
+              <Button borderRadius='md' colorScheme='blue' variant='ghost' size='md' type="submit">Inicio</Button>
             </Form>
             <Form id="search-form" role="search">
-              <input
+            <InputGroup>
+              <InputLeftElement pointerEvents='none'>
+                {searching ? (
+                <SpinnerIcon color='gray.300' id="search-spinner" />
+                ):(
+                <SearchIcon color='gray.300' />
+                )}
+              </InputLeftElement>
+              <Input
                 id="q"
-                className={searching ? "loading" : ""}
                 aria-label="Search contacts"
-                placeholder="Search"
+                placeholder="Buscar"
                 type="search"
                 name="q"
                 defaultValue={q}
@@ -58,18 +67,10 @@ export default function Root() {
                   });
                 }}
               />
-              <div
-                id="search-spinner"
-                aria-hidden
-                hidden={!searching}
-              />
-              <div
-                className="sr-only"
-                aria-live="polite"
-              ></div>
+            </InputGroup>
             </Form>
             <Form method="post">
-              <button type="submit">Nuevo</button>
+              <Button colorScheme='green' borderRadius='md'  size='md' type="submit">Nuevo</Button>
             </Form>
           </div>
           <nav>
@@ -101,7 +102,7 @@ export default function Root() {
             </ul>
           ) : (
             <p>
-              <i>No contacts</i>
+              <i>No hay contactos</i>
             </p>
           )}
         </nav>

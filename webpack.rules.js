@@ -35,6 +35,18 @@ module.exports = [
     type: 'asset/resource',
   },
   {
+    test: /\.(ttf|otf|eot|svg|woff2|woff)$/,
+    use: [
+        {
+            loader: "file-loader",
+            options: {
+                name: "[path][name].[ext]",
+                publicPath: "../",
+            },
+        },
+    ],
+  },
+  {
     test: /\.(scss)$/,
     use: [
       {

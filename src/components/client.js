@@ -1,5 +1,6 @@
 import { Form, useLoaderData, useFetcher, } from "react-router-dom";
 import { getContact, updateContact } from "../contacts";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Text, Button, Heading, Card, CardHeader, CardBody, Divider, Center} from '@chakra-ui/react'
 
 export async function action({ request, params }) {
   let formData = await request.formData();
@@ -24,42 +25,92 @@ export default function Client() {
   const { contact } = useLoaderData();
 
   return (
-    <div id="contact">
+    <Box display='flex' flexDir='column' gap='20px'>
+       <Card p='20px'>
+          <CardHeader>
+            <Heading size='lg'>
+              {contact.first ? (
+                <>
+                  {contact.first} 
+                </>
+              ) : (
+                <i>No Name</i>
+              )}{" "}
+              </Heading>
+            </CardHeader>
+            <CardBody>
+              {contact.mail && <Text size='lg'>{contact.mail}</Text>}
+              {contact.phone && <Text size='lg'>{contact.phone}</Text>}
+              <Center>
+                <Divider m='20px' w='70%' />
+              </Center>
+              <Box display='flex' flexDirection='row' justifyContent='space-evenly'>
+                <Form action="edit">
+                  <Button borderRadius='md' colorScheme='blue' variant='ghost' size='md' type="submit">Editar</Button>
+                </Form>
+                <Form
+                  method="post"
+                  action="destroy"
+                  onSubmit={(event) => {
+                    if (
+                      !confirm(
+                        "Please confirm you want to delete this record."
+                      )
+                    ) {
+                      event.preventDefault();
+                    }
+                  }}
+                >
+                  <Button  colorScheme='red' borderRadius='md'  size='md' type="submit">Borrar</Button>
+                </Form>
+              </Box>
+            </CardBody>
+       </Card>
       <div>
-        <h1>
-          {contact.first || contact.last ? (
-            <>
-              {contact.first} {contact.last}
-            </>
-          ) : (
-            <i>No Name</i>
-          )}{" "}
-        </h1>
+         <Tabs>
+          <TabList>
+            <Tab>One</Tab>
+            <Tab>Two</Tab>
+            <Tab>Three</Tab>
+            <Tab>One</Tab>
+            <Tab>Two</Tab>
+            <Tab>Three</Tab>
+            <Tab>One</Tab>
+            <Tab>Two</Tab>
+            <Tab>Three</Tab>
+          </TabList>
 
-        {contact.mail && <p>{contact.mail}</p>}
-        {contact.phone && <p>{contact.phone}</p>}
-              {/* Leer el array con servicios, y por cada item, armar una lista */}
-        <div>
-          <Form action="edit">
-            <button type="submit">Editar</button>
-          </Form>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              if (
-                !confirm(
-                  "Please confirm you want to delete this record."
-                )
-              ) {
-                event.preventDefault();
-              }
-            }}
-          >
-            <button type="submit">Borrar</button>
-          </Form>
-        </div>
+          <TabPanels>
+            <TabPanel>
+              <p>one!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>two!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>three!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>three!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>thr2ee!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>thr3ee!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>th4ree!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>th5ee!</p>
+            </TabPanel>
+            <TabPanel>
+              <p>thr6ee!</p>
+            </TabPanel>
+          </TabPanels>
+        </Tabs> 
       </div>
-    </div>
+    </Box>
   );
 }
